@@ -1,0 +1,109 @@
+#!/opt/homebrew/bin/bash
+
+# check commit message
+## master branch
+### - not empty
+function checkEmpty() {
+  local TYPE="$1"
+  local VALUE="$2"
+
+  if [[ -z "$VALUE" ]]
+  then
+    echo "$TYPE is empty"
+    exit 1
+  fi
+}
+
+### - is lower case
+function checkLowercase() {
+  local TYPE="$1"
+  local VALUE="$2"
+  local VALUE_TO_LOWER_CASE
+  VALUE_TO_LOWER_CASE=$(echo "$VALUE" | tr '[:upper:]' '[:lower:]')
+
+  if [[ "$VALUE_TO_LOWER_CASE" != "$VALUE" ]]; then
+    echo "$TYPE is not lower case"
+    echo "value = $VALUE"
+    exit 1
+  fi
+}
+
+### - include type
+function includeInTypes() {
+  local VALUE="$1"
+  local TYPES_ARRAY=(feature bugfix docs style refactor perf test build config ci)
+
+  if [[ ! "${TYPES_ARRAY[*]}" =~ ${VALUE} ]]; then
+    echo "Unknown type"
+    echo "value = $VALUE"
+    exit 1
+  fi
+}
+
+## other branches
+### - validate task number
+function validateTaskNumber() {
+  local VALUE=$1
+
+  local REGEXP="^\[PETS-[0-9]+\]$"
+  if [[ ! "$VALUE" =~ $REGEXP ]]; then
+    echo "The issue number is not specified correctly"
+    echo "value = $VALUE"
+    echo "need format AUTH-[0-9]+"
+    exit 1
+  fi
+}
+
+### - max length
+function checkMaxLength() {
+  local TYPE="$1"
+  local MAX_LENGTH="$2"
+  local VALUE="$3"
+
+  if [[ "${#VALUE}" -gt "$MAX_LENGTH" ]]; then
+    echo "$TYPE is longer than the maximum length ($MAX_LENGTH)"
+    echo "value = $VALUE"
+    exit 1
+  fi
+}
+
+MESSAGE=$(cat "$1")
+BRANCH_NAME=$(git branch --show-current)
+
+if [[ "$BRANCH_NAME" == "master" ]]; then
+  # variables
+  COMMIT=$(cat "$1")
+  TASK_NUMBER=$(echo "$COMMIT" | awk -F' ' '{print $1}')
+  TYPE=$(echo "$COMMIT" | awk -F'] ' '{print $2}' | awk -F'(' '{print $1}')
+  SCOPE=$(echo "$COMMIT" | awk -F'(' '{print $2}' | awk -F')' '{print $1}')
+  MESSAGE=$(echo "$COMMIT" | awk -F': ' '{print $2}')
+
+  # checking
+  ## TASK NUMBER
+  validateTaskNumber "$TASK_NUMBER"
+
+  ## TYPE
+  checkEmpty "TYPE" "$TYPE"
+  includeInTypes "$TYPE"
+
+  ## SCOPE
+  checkEmpty "SCOPE" "$SCOPE"
+  checkLowercase "SCOPE" "$SCOPE"
+
+  ## SUBJECT
+  checkEmpty "SUBJECT" "$MESSAGE"
+  checkLowercase "SUBJECT" "$MESSAGE"
+  checkMaxLength "SUBJECT" 125 "$MESSAGE"
+else
+  ### variables
+  mapfile -t MESSAGE_CHUNKS < <( echo "$MESSAGE" | tr ' ' '\n' )
+  TAIL="${MESSAGE_CHUNKS[*]:1}"
+
+  ### checking
+  validateTaskNumber "${MESSAGE_CHUNKS[0]}"
+  checkEmpty "BODY" "$TAIL"
+  checkMaxLength "COMMIT" 125 "$MESSAGE"
+fi
+
+### lint and prettier checks
+npm run pre-commit

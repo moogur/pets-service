@@ -1,0 +1,40 @@
+{
+  "files.exclude": {
+    ".git": true,
+    ".github": true,
+    ".husky": true,
+    "coverage": true,
+    "dist": true,
+    "node_modules": true,
+    "Dockerfile": true,
+    "README.md": true,
+    "test/jest.unit.config.ts": true,
+    "test/jest.e2e.config.ts": true,
+    ".idea": true
+  },
+  // todo color theme customization
+  "workbench.colorCustomizations": {
+    "activityBar.background": "#ef7853",
+    "activityBar.activeBorder": "#8af4a3",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#8af4a3",
+    "activityBarBadge.foreground": "#15202b",
+    "titleBar.activeBackground": "#eb5424",
+    "titleBar.inactiveBackground": "#eb542499",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "statusBar.background": "#eb5424",
+    "statusBarItem.hoverBackground": "#ef7853",
+    "statusBar.foreground": "#e7e7e7",
+    "activityBar.activeBackground": "#ef7853",
+    "sash.hoverBorder": "#ef7853",
+    "statusBarItem.remoteBackground": "#eb5424",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799"
+  },
+  "peacock.color": "#eb5424",
+  "jest.autoRun": "off",
+  "git.ignoreLimitWarning": true,
+  "terminal.integrated.defaultProfile.osx": "bash_node_16"
+}

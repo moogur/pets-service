@@ -1,0 +1,10 @@
+{
+  "version": "0.2",
+  "enabled": true,
+  "language": "en, ru",
+  "minWordLength": 3,
+  "maxNumberOfProblems": 1000,
+  "numSuggestions": 8,
+  "words": ["num", "utf", "nestjs", "dto", "typeorm", "uuidv", "middlewares"],
+  "ignorePaths": [".vscode", ".editorconfig", ".gitignore"]
+}
