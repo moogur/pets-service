@@ -27,7 +27,20 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
-# Project
-/env/*.env
-!/env/.example.env
-!/env/.test.env
+# IDE - VSCode
+/.vscode
+
+# project files
+.editorconfig
+.prettier
+.eslintrc.js
+nest-cli.json
+package-lock.json
+package.json
+README.md
+tsconfig.build.json
+tsconfig.json
+.eslintignore
+.prettierignore
+tsconfig-checks.json
+src/migrations
