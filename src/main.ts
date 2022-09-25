@@ -4,7 +4,7 @@ import { setEnvironments, setupSwagger } from 'back-shared-utils/lib/utils';
 
 import { filePaths } from '@shared/const';
 
-import { AppModule } from './app.module';
+import { MainModule } from './main.module';
 
 try {
   setEnvironments(filePaths.env.serviceToken);
@@ -13,7 +13,7 @@ try {
 }
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(MainModule, { cors: true });
 
   setupSwagger({
     app,
