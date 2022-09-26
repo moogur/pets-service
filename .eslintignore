@@ -45,3 +45,4 @@ tsconfig-checks.json
 .prettierignore
 webpack.config.js
 src/migrations
+.scannerwork

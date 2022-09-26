@@ -14,42 +14,19 @@ Service for storing information about animals (visits to doctors, birthdays, var
 
 В режиме `test` все переменные пробрасываются при запуске команды, в остальных режимах переменные берутся из файлов (необходимо настроить в докере проброс этих файлов в контейнер)
 
-- .service_token.env (значения должны быть заполнены) - только на чтение
+- .service-token.env (значения должны быть заполнены) - только на чтение
 
 ```bash
 SERVICE_TOKEN=
 ```
 
+- .sonar.env
+
+```bash
+SONAR_TOKEN=
+SONAR_SERVER_URL=
+```
+
+или можно добавить руками данные переменные
+
 Сервисом отвечающим за авторизацию является - `https://github.com/moogur/authorization-service`
-
-## Команды запуска
-
-### Start
-
-```bash
-# development watch mode
-$ npm run serve
-```
-
-### Test
-
-```bash
-# unit tests
-$ npm run test
-
-# e2e tests
-$ npm run test:e2e
-```
-
-### Database
-
-```bash
-# clearing db
-$ npm run db:drop
-
-# creating migration
-$ npm run db:create
-
-# application of migrations
-$ npm run db:migrate
-```

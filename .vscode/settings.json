@@ -10,6 +10,8 @@
     "README.md": true,
     "test/jest.unit.config.ts": true,
     "test/jest.e2e.config.ts": true,
+    "scripts": true,
+    ".scannerwork": true,
     ".idea": true
   },
   // todo color theme customization

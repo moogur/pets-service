@@ -19,6 +19,7 @@ const config: Config.InitialOptions = {
     '^.+\\.(j|t)sx?$': 'ts-jest',
   },
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, { prefix: '<rootDir>/' }),
+  testResultsProcessor: 'jest-sonar-reporter',
 };
 
 export default config;
