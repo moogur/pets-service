@@ -32,7 +32,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  ignorePatterns: ['.eslintrc.js', 'node_modules'],
+  ignorePatterns: ['.eslintrc.js', 'node_modules', 'scripts'],
   settings: {
     'import/internal-regex': '^(@src|@env|@shared|@modules|@configs)/',
     'import/ignore': ['node_modules'],

@@ -44,3 +44,4 @@ tsconfig.json
 .prettierignore
 tsconfig-checks.json
 src/migrations
+.scannerwork
