@@ -34,7 +34,7 @@ module.exports = {
   },
   ignorePatterns: ['.eslintrc.js', 'node_modules', 'scripts'],
   settings: {
-    'import/internal-regex': '^(@src|@env|@shared|@modules|@configs)/',
+    'import/internal-regex': '^(@src|@env|@shared|@modules|@configs|@api)/',
     'import/ignore': ['node_modules'],
   },
   rules: {
@@ -90,5 +90,6 @@ module.exports = {
     'lodash/import-scope': [2, "member"],
     'lodash/prefer-lodash-typecheck': 'off',
     'lodash/matches-shorthand': [2, "never"],
+    "lodash/prefer-lodash-method": [2, {"ignoreObjects": ["^this.[a-zA-Z]+Repository"]}]
   },
 };

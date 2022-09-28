@@ -23,7 +23,7 @@
     "db:migrate": "npm run typeorm migration:run",
     "cache:clear": "npm run typeorm cache:clear",
     "typeorm": "export $(cat env/.development.env | xargs) && ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm -d ./src/configs/ormconfigMigrations.ts",
-    "sonar:publish": "npm run test:coverage && node ./scripts/sonarqube-scanner.js",
+    "publish:sonar": "npm run test:coverage && node ./scripts/sonarqube-scanner.js",
     "pre-commit": "lint-staged"
   },
   "dependencies": {
@@ -32,6 +32,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.1.0",
     "@nestjs/typeorm": "^9.0.0",
+    "axios": "^0.27.2",
     "back-shared-utils": "github:moogur/back-shared-utils#v0.4.2",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
