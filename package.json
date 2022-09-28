@@ -13,7 +13,7 @@
     "serve:debug": "npm run serve -- --debug",
     "build": "rimraf dist && nest build",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
-    "test": "export $(cat env/.test.env | xargs) && mkdir -p coverage && jest --config ./test/jest.unit.config.ts",
+    "test": "export $(cat env/.test.env | xargs) && mkdir -p coverage && jest --config ./test/jest.unit.config.ts --passWithNoTests",
     "test:watch": "npm run test -- --watch",
     "test:coverage": "npm run test -- --collectCoverage",
     "test:debug": "export $(cat env/.test.env | xargs) && node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand --config ./test/jest.unit.config.ts",
@@ -23,7 +23,7 @@
     "db:migrate": "npm run typeorm migration:run",
     "cache:clear": "npm run typeorm cache:clear",
     "typeorm": "export $(cat env/.development.env | xargs) && ts-node -r tsconfig-paths/register ./node_modules/.bin/typeorm -d ./src/configs/ormconfigMigrations.ts",
-    "sonar:publish": "npm run test:coverage && node ./scripts/sonarqube-scanner.js",
+    "publish:sonar": "npm run test:coverage && node ./scripts/sonarqube-scanner.js",
     "pre-commit": "lint-staged"
   },
   "dependencies": {
@@ -32,7 +32,8 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/swagger": "^6.1.0",
     "@nestjs/typeorm": "^9.0.0",
-    "back-shared-utils": "github:moogur/back-shared-utils#v0.4.2",
+    "axios": "^0.27.0",
+    "back-shared-utils": "github:moogur/back-shared-utils#v0.5.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "lodash": "^4.17.21",

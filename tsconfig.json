@@ -24,6 +24,7 @@
     ],
     "paths": {
       "@shared/*": ["src/shared/*"],
+      "@api/*": ["src/api/*"],
       "@modules/*": ["src/modules/*"],
       "@configs/*": ["src/configs/*"],
       "@env/*": ["env/*"],
