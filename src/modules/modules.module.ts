@@ -1,5 +1,5 @@
 import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
-import { UserAuthMiddleware } from 'back-shared-utils/lib/middlewares';
+import { AuthMiddleware } from 'back-shared-utils/lib/middlewares';
 
 import { PetsModule } from './pets';
 
@@ -8,7 +8,7 @@ import { PetsModule } from './pets';
 })
 export class ModulesModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(UserAuthMiddleware).forRoutes({ path: '/pets', method: RequestMethod.ALL });
-    consumer.apply(UserAuthMiddleware).forRoutes({ path: '/pets/*', method: RequestMethod.ALL });
+    consumer.apply(AuthMiddleware).forRoutes({ path: '/pets', method: RequestMethod.ALL });
+    consumer.apply(AuthMiddleware).forRoutes({ path: '/pets/*', method: RequestMethod.ALL });
   }
 }
