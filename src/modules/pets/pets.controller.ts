@@ -37,7 +37,6 @@ export class PetsController {
   @Get('/birthday')
   @ApiResponse(internalServerErrorTypeSwagger)
   @ApiOperation({ summary: 'Get birthday information about for all pets', description: 'user id in token' })
-  @UseGuards(AuthGuard)
   async getPetsBirthday(@UserId() userId: string | null): Promise<ResponsePetsBirthday[]> {
     const pets = await this.petsService.getPetsBirthday(userId);
 
@@ -48,7 +47,6 @@ export class PetsController {
   @ApiResponse(internalServerErrorTypeSwagger)
   @ApiResponse(badRequestErrorSwagger)
   @ApiOperation({ summary: 'Get information about pet', description: 'user id in token' })
-  @UseGuards(AuthGuard)
   async getPet(@UserId() userId: string | null, @Param('id', new ParseUUIDPipe()) petId: string): Promise<ResponsePet> {
     const pet = await this.petsService.getPet(userId, petId);
 
@@ -61,7 +59,6 @@ export class PetsController {
   @ApiOperation({ summary: 'Adding new pet' })
   @ApiResponse(createEntityResponseOnlyIdSwagger)
   @UsePipes(new BackendValidationPipe())
-  @UseGuards(AuthGuard)
   async addPet(@UserId() userId: string | null, @Body() addPetDto: AddPetDto) {
     const pet = await this.petsService.addPet(userId, addPetDto);
 
@@ -75,7 +72,6 @@ export class PetsController {
   @ApiResponse(badRequestErrorSwagger)
   @ApiOperation({ summary: 'Update pet', description: 'user id in token' })
   @UsePipes(new BackendValidationPipe())
-  @UseGuards(AuthGuard)
   async updatePet(
     @Body() updatePetDto: AddPetDto,
     @UserId() userId: string | null,
@@ -91,7 +87,6 @@ export class PetsController {
   @ApiResponse(okEntityResponseOnlyIdSwagger)
   @ApiResponse(badRequestErrorSwagger)
   @ApiOperation({ summary: 'Remove pet', description: 'user id in token' })
-  @UseGuards(AuthGuard)
   async removePet(@UserId() userId: string | null, @Param('id', new ParseUUIDPipe()) petId: string) {
     await this.petsService.removePet(userId, petId);
 
@@ -105,7 +100,6 @@ export class PetsController {
   @ApiResponse(badRequestErrorSwagger)
   @ApiOperation({ summary: 'Update viewers for pet', description: 'user id in token' })
   @UsePipes(new BackendValidationPipe())
-  @UseGuards(AuthGuard)
   async updateViewer(
     @Body() updateViewerDto: UpdateViewerDto,
     @UserId() userId: string | null,
@@ -124,7 +118,6 @@ export class PetsController {
     summary: 'Get list pets with filtering and pagination',
   })
   @UsePipes(new BackendValidationPipe())
-  @UseGuards(AuthGuard)
   async getPetsWithFilterAndPagination(
     @UserId() userId: string | null,
     @Query() filter: GetPetsWithFilterAndPaginationDto,

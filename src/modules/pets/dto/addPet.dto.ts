@@ -9,7 +9,7 @@ import { values } from 'lodash';
 import { AnimalTypeEnum } from '@shared/types';
 
 export class AddPetDto {
-  @ApiProperty({ description: "pet's] gender", example: GenderEnum.Male, enum: values(GenderEnum) })
+  @ApiProperty({ description: "pet's gender", example: GenderEnum.Male, enum: values(GenderEnum) })
   @IsEnum(GenderEnum)
   readonly gender: GenderEnum;
 

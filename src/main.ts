@@ -1,6 +1,7 @@
 import path from 'node:path';
 
 import { NestFactory } from '@nestjs/core';
+import { AuthGuard, AuthMiddleware } from 'back-shared-utils';
 import { ProcessEnvironmentKeys } from 'back-shared-utils/lib/types';
 import { setEnvironments, setupSwagger } from 'back-shared-utils/lib/utils';
 
@@ -16,6 +17,9 @@ try {
 
 async function bootstrap() {
   const app = await NestFactory.create(MainModule, { cors: true });
+
+  app.use(AuthMiddleware);
+  app.useGlobalGuards(new AuthGuard());
 
   setupSwagger({
     app,
